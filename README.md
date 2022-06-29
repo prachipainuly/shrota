@@ -4,7 +4,7 @@ A gaming web app for capturing ASL gestures and converting them to text.
 Steps to run backend server:
 
 1. Make sure to cd shrota/server
-2. Pip install requirements
+2. Pip install -r requirements
 3. cd backend 
    Since, manage.py is the initial file for our Django backend,
    we will now run commands from root of the project that is backend.
