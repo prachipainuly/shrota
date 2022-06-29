@@ -1,22 +1,25 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
+import { api } from '../api'
 import ListSquare from './ListSquare'
 
 const Categories = () => {
 
-    const categories = [
-        "Fruits",
-        "Nature",
-        "Food",
-        "Greetings",
-        "Animals",
-        "Sports",
-        "Drinks",
-        "Country Names",
-    ]
+  const [ categories, setCategories ] = useState([])
+
+  useEffect(() => {
+    api.get("get_categories")
+      .then(res => {
+        console.log(res)
+        setCategories(res.data.names)
+      }).catch(function(error) {
+        console.log(error)
+        setCategories([error.toJSON().message])
+      })
+  }, [])
     
   return (
     <ListSquare 
-        list={categories} 
+        list={categories}
         title="Pick category!" 
         color="#ddc7ff"
         borderColor="#7b6492"
