@@ -8,4 +8,4 @@ class Word(models.Model):
 
 class User(models.Model):
     name = models.CharField(max_length=200)
-    score = models.IntegerField(max_length=200)
+    score = models.IntegerField()
