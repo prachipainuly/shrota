@@ -3,7 +3,7 @@ import { Divider } from '@mui/material';
 import { TopBar } from './components/TopBar';
 import Categories from './components/Categories';
 import GameArea from './components/GameArea';
-import NicknameSquare from './components/NicknameSquare';
+import BottomSquare from './components/BottomSquare';
 import Ranking from './components/Ranking';
 import StartGame from './components/StartGame';
 
@@ -17,7 +17,7 @@ function App() {
               <Categories />
               <div className="vertical-flexbox">
                   <GameArea />
-                  <NicknameSquare />
+                  <BottomSquare />
               </div>
               <div className="vertical-flexbox">
                   <Ranking />

@@ -1,10 +1,20 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { api } from '../api';
+import { useGameContext, useUpdateGame } from '../contexts/GameContext'
 
 const GameArea = () => {
 
-    const [state, setState] = useState({
-        gameStarted: false
-    });
+    const gameContext = useGameContext()
+    const updateGameContext = useUpdateGame()
+
+    useEffect(() => {
+      api.get('get_word')
+        .then(res => {
+            updateGameContext({...gameContext, currentWord: res.data.name})
+        }).catch(function(error) {
+            updateGameContext({...gameContext, currentWord: 'error'})
+        })
+    }, [gameContext.wordCount, updateGameContext])
 
     return (
         <div style={{
@@ -12,6 +22,13 @@ const GameArea = () => {
             height: '50vh',
             width: '100vh'
         }}>
+            {console.log(gameContext.gameRunning)}
+            {gameContext.gameRunning && 
+                <spam>Game running!</spam>
+            }
+            {!gameContext.gameRunning && 
+                <spam>Game not running. Press Play to start a new game</spam>
+            }
         </div>
     )
 }
