@@ -14,7 +14,7 @@ const GameArea = () => {
         }).catch(function(error) {
             updateGameContext({...gameContext, currentWord: 'error'})
         })
-    }, [gameContext.wordCount, updateGameContext])
+    }, [gameContext.scoreLastRound])
 
     return (
         <div style={{
