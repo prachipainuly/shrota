@@ -32,7 +32,7 @@ const MPHands = () => {
         onFrame: async () => {
           await hands.send({ image: webcamRef.current.video });
         },
-        width: '60vh',
+        width: '70vh',
         height: '50vh',
       });
       camera.start();
@@ -40,6 +40,7 @@ const MPHands = () => {
   }, []);
 
   const onResults = (results) => {
+    console.log(results)
     const videoWidth = webcamRef.current.video.videoWidth;
     const videoHeight = webcamRef.current.video.videoHeight;
     canvasRef.current.width = videoWidth;
@@ -82,7 +83,7 @@ const MPHands = () => {
           marginRight: "auto",
           textAlign: "center",
           zindex: 9,
-          width: '60vh',
+          width: '70vh',
           height: '50vh',
         }}
       />
@@ -94,7 +95,7 @@ const MPHands = () => {
           marginRight: "auto",
           textAlign: "center",
           zindex: 9,
-          width: '60vh',
+          width: '70vh',
           height: '50vh',
         }}
       ></canvas>

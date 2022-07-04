@@ -21,7 +21,7 @@ const GameArea = () => {
         <div style={{
             backgroundColor: 'white',
             height: '50vh',
-            width: '60vh'
+            width: '70vh'
         }}>
             {console.log(gameContext.gameRunning)}
             {gameContext.gameRunning && 
