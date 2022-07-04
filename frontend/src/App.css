@@ -1,0 +1,22 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+.app{
+  background-color: rgb(188, 227, 231);
+  height: 100vh;
+}
+
+.main{
+  margin: 1%;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.vertical-flexbox{
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  justify-content: space-between;
+}
