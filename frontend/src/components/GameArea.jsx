@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { api } from '../api';
 import { useGameContext, useUpdateGame } from '../contexts/GameContext'
+import MPHands from './MPHands';
 
 const GameArea = () => {
 
@@ -20,11 +21,11 @@ const GameArea = () => {
         <div style={{
             backgroundColor: 'white',
             height: '50vh',
-            width: '100vh'
+            width: '60vh'
         }}>
             {console.log(gameContext.gameRunning)}
             {gameContext.gameRunning && 
-                <spam>Game running!</spam>
+                <MPHands />
             }
             {!gameContext.gameRunning && 
                 <spam>Game not running. Press Play to start a new game</spam>
