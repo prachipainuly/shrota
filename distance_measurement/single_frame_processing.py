@@ -35,8 +35,8 @@ def calculate_distance_from_two_frames(vector1, results):
 
     for j in range(20):
         vector_for_letter_a_x[j + 1] = (vector_for_letter_a_x[j + 1] - x_zero) / handsize_reference_a
-        vector1[1][j + 1] = (vector_for_letter_a_y[j + 1] - y_zero) / handsize_reference_a
-        vector1[2][j + 1] = (vector_for_letter_a_z[j + 1] - z_zero) / handsize_reference_a
+        vector_for_letter_a_y[j + 1] = (vector_for_letter_a_y[j + 1] - y_zero) / handsize_reference_a
+        vector_for_letter_a_z[j + 1] = (vector_for_letter_a_z[j + 1] - z_zero) / handsize_reference_a
 
 
     ## Now we calculate for each handpoint the difference
