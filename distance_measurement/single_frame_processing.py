@@ -2,6 +2,8 @@ import math
 
 #from Machine_learning.read_single_frames import get_handpoints_from_singleframe
 
+## vector1 needs to be a list which contains three lists, one for x, one for y and one for z coordinates of
+## mediapipe landmarks
 def calculate_distance_from_two_frames(vector1, results):
     ## At first we normalize the vector to landmark of writs (x/y/z_zero)
     x_zero = vector1[0][0]
