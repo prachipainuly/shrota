@@ -1,6 +1,6 @@
 import React from 'react'
 import { useGameContext, useUpdateGame } from '../contexts/GameContext'
-
+import Timer from './Timer';
 const StartGame = () => {
 
   const gameContext = useGameContext();
@@ -30,6 +30,11 @@ const StartGame = () => {
       {gameContext.gameRunning && 
         <p style={{fontSize: '2rem', fontWeight: 'bold', margin: '0 2% 2% 0'}}>Exit</p>
       }
+      <div style={{
+        width:"100px"
+      }}> 
+        <Timer />
+      </div>
     </div>
   )
 }
