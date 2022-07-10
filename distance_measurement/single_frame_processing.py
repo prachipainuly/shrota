@@ -4,7 +4,7 @@ import math
 
 ## vector1 needs to be a list which contains three lists, one for x, one for y and one for z coordinates of
 ## mediapipe landmarks
-def calculate_distance_from_two_frames(vector1, results):
+def calculate_distance_from_two_frames(vector1):
     ## At first we normalize the vector to landmark of writs (x/y/z_zero)
     x_zero = vector1[0][0]
     y_zero = vector1[1][0]
