@@ -33,7 +33,7 @@ const StartGame = () => {
       <div style={{
         width:"100px"
       }}> 
-        <Timer></Timer>
+        <Timer />
       </div>
     </div>
   )
