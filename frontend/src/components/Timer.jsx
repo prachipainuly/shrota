@@ -2,7 +2,6 @@ import { CircularProgressbar } from 'react-circular-progressbar';
 import 'react-circular-progressbar/dist/styles.css';
 import React from 'react';
 import { useGameContext } from '../contexts/GameContext'
-
 function Timer(props){
     const gameContext = useGameContext();
     const [seconds, setSeconds] = React.useState();

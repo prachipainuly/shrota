@@ -9,7 +9,6 @@ const Categories = () => {
   useEffect(() => {
     api.get("get_categories")
       .then(res => {
-        console.log(res)
         setCategories(res.data.names)
       }).catch(function(error) {
         console.log(error)

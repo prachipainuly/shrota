@@ -74,9 +74,8 @@ const MPHands = () => {
 
   return (
     <div>
-      {gameContext.runCamera && 
+      {gameContext.gameRunning && 
         <>
-        {console.log("run camera")}
           <Webcam
             audio={false}
             mirrored={true}

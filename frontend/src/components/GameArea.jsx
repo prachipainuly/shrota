@@ -1,28 +1,11 @@
-import { CircularProgress } from '@mui/material';
-import React, { useEffect, useState } from 'react'
-import { api } from '../api';
+import React from 'react'
 import { useGameContext, useUpdateGame } from '../contexts/GameContext'
 import MPHands from './MPHands';
-import Timer from './Timer';
 
 const GameArea = () => {
 
     const gameContext = useGameContext()
     const updateGameContext = useUpdateGame()
-    const [ state, setState ] = useState({
-        loadingResults: false,
-        newWordTimerRunning: false,
-        // resultsTimerRunning: false,
-    })
-
-    useEffect(() => {
-      api.get('get_word')
-        .then(res => {
-            updateGameContext({...gameContext, currentWord: res.data.name})
-        }).catch(function(error) {
-            updateGameContext({...gameContext, currentWord: 'error'})
-        })
-    }, [gameContext.scoreLastRound])
 
     return (
         <div style={{
@@ -31,22 +14,6 @@ const GameArea = () => {
             width: '70vh'
         }}>
             <MPHands />
-            {gameContext.gameRunning && state.loadingResults &&
-                <CircularProgress />
-            }
-            {gameContext.gameRunning && state.newWordTimerRunning && 
-                <spam>Next word: {gameContext.words[gameContext.currentWord]}</spam>
-            }
-            {gameContext.gameRunning && 
-                !state.newWordTimerRunning &&
-                    <>
-                        {updateGameContext({...gameContext, runCamera: true})}
-                        <Timer duration={5} onFinish={() => {
-                            updateGameContext({...gameContext, runCamera: false})
-                            setState({...state, newWordTimerRunning: true})
-                        }} />
-                    </>
-            }
             {!gameContext.gameRunning && 
                 <spam>Game not running. Press Play to start a new game</spam>
             }
@@ -55,3 +22,13 @@ const GameArea = () => {
 }
 
 export default GameArea
+
+
+// Game start: gamestate ia true
+//     gameRunning true
+//     for 10 times:
+//         3 seconds to show whats the word  timwe 1 : state time is up true
+//         5 seconds with camera timer 2 : state time is up true
+//         Loading result
+//         3 seconds with result timer 3
+//     gameRunning false

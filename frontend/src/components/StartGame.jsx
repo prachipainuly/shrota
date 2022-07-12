@@ -12,9 +12,13 @@ const StartGame = () => {
       updateGameContext({gameRunning: false})
       :
       (
-        api.get('get_random_alphabets')
+        api.get('get_random_alphabets/')
           .then(res => {
-            updateGameContext({...gameContext, words: res.data, gameRunning: true, currentWord: 0})
+            let words = []
+            res.data.map(item => {
+              words = [...words, item.name]
+            })
+            updateGameContext({...gameContext, words: words, currentWord: 0, gameRunning: true})
           })
           .catch(function(error) {
             console.log('Error getting the list of words. Hardcoded list applied.')
