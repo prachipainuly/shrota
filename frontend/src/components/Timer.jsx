@@ -3,22 +3,20 @@ import 'react-circular-progressbar/dist/styles.css';
 import React from 'react';
 import { useGameContext } from '../contexts/GameContext'
 
-function Timer(){
+function Timer(props){
     const gameContext = useGameContext();
-    const starttime=5
-    const [seconds, setSeconds] = React.useState(starttime);
+    const [seconds, setSeconds] = React.useState();
+    
+    const [onFinish, setOnFinish] = React.useState();
 
     React.useEffect(() => {
-        if (gameContext.gameRunning===false) {    
-            setSeconds('5')
-        }
-        if(seconds===1){
-            setSeconds('cheese');
-        }
-        if ((seconds > 0)&&(gameContext.gameRunning===true)) {
+        setSeconds(props.duration)
+        setOnFinish(props.onFinish)
+
+        if (seconds > 0) { // CHECK THIS PART
           setTimeout(() => setSeconds(seconds - 1), 1000);
         } else if(seconds===0)  {
-          setSeconds('timeupp!');
+          onFinish()
         }}
     );
     

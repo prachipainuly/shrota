@@ -14,12 +14,12 @@ export function useUpdateGame() {
 export function GameProvider({ children }){
     const [state, setState] = useState({
         gameRunning: false,
-        currentWord: 'Banana',
-        scoreLastRound: 0,
+        words: [],
+        currentWord: 0,
+        scoreLastRound: 0
     })
 
     function updateGame(state){
-        console.log(state)
         setState(state)
     }
 

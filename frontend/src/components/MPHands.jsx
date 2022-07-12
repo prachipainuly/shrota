@@ -3,16 +3,17 @@ import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands';
 import React, { useEffect, useRef } from 'react'
 import Webcam from 'react-webcam';
+import { useGameContext } from '../contexts/GameContext';
 
 const MPHands = () => {
   const webcamRef = useRef(null);
   const canvasRef = useRef(null);
+  const gameContext = useGameContext();
 
   useEffect(() => {
     console.log(Hands);
     const hands = new Hands({
       locateFile: (file) => {
-        
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/${file}`;
       },
     });
@@ -40,7 +41,7 @@ const MPHands = () => {
   }, []);
 
   const onResults = (results) => {
-    console.log(results)
+    console.log(results.multiHandLandmarks)
     const videoWidth = webcamRef.current.video.videoWidth;
     const videoHeight = webcamRef.current.video.videoHeight;
     canvasRef.current.width = videoWidth;
@@ -73,32 +74,37 @@ const MPHands = () => {
 
   return (
     <div>
-      <Webcam
-        audio={false}
-        mirrored={true}
-        ref={webcamRef}
-        style={{
-          position: "absolute",
-          marginLeft: "auto",
-          marginRight: "auto",
-          textAlign: "center",
-          zindex: 9,
-          width: '70vh',
-          height: '50vh',
-        }}
-      />
-      <canvas
-        ref={canvasRef}
-        style={{
-          position: "absolute",
-          marginLeft: "auto",
-          marginRight: "auto",
-          textAlign: "center",
-          zindex: 9,
-          width: '70vh',
-          height: '50vh',
-        }}
-      ></canvas>
+      {gameContext.runCamera && 
+        <>
+        {console.log("run camera")}
+          <Webcam
+            audio={false}
+            mirrored={true}
+            ref={webcamRef}
+            style={{
+              position: "absolute",
+              marginLeft: "auto",
+              marginRight: "auto",
+              textAlign: "center",
+              zindex: 9,
+              width: '70vh',
+              height: '50vh',
+            }}
+          />
+          <canvas
+            ref={canvasRef}
+            style={{
+              position: "absolute",
+              marginLeft: "auto",
+              marginRight: "auto",
+              textAlign: "center",
+              zindex: 9,
+              width: '70vh',
+              height: '50vh',
+            }}
+          ></canvas>
+        </>
+      }
     </div>
   );
 };
