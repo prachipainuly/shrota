@@ -1,12 +1,19 @@
+import { CircularProgress } from '@mui/material';
 import React, { useEffect, useState } from 'react'
 import { api } from '../api';
 import { useGameContext, useUpdateGame } from '../contexts/GameContext'
 import MPHands from './MPHands';
+import Timer from './Timer';
 
 const GameArea = () => {
 
     const gameContext = useGameContext()
     const updateGameContext = useUpdateGame()
+    const [ state, setState ] = useState({
+        loadingResults: false,
+        newWordTimerRunning: false,
+        // resultsTimerRunning: false,
+    })
 
     useEffect(() => {
       api.get('get_word')
@@ -23,9 +30,22 @@ const GameArea = () => {
             height: '50vh',
             width: '70vh'
         }}>
-            {console.log(gameContext.gameRunning)}
+            <MPHands />
+            {gameContext.gameRunning && state.loadingResults &&
+                <CircularProgress />
+            }
+            {gameContext.gameRunning && state.newWordTimerRunning && 
+                <spam>Next word: {gameContext.words[gameContext.currentWord]}</spam>
+            }
             {gameContext.gameRunning && 
-                <MPHands />
+                !state.newWordTimerRunning &&
+                    <>
+                        {updateGameContext({...gameContext, runCamera: true})}
+                        <Timer duration={5} onFinish={() => {
+                            updateGameContext({...gameContext, runCamera: false})
+                            setState({...state, newWordTimerRunning: true})
+                        }} />
+                    </>
             }
             {!gameContext.gameRunning && 
                 <spam>Game not running. Press Play to start a new game</spam>
