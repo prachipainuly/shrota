@@ -7,7 +7,7 @@ const Categories = () => {
   const [ categories, setCategories ] = useState([])
 
   useEffect(() => {
-    api.get("get_categories")
+    api.get("get_categories/")
       .then(res => {
         setCategories(res.data.names)
       }).catch(function(error) {

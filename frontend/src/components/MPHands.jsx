@@ -11,7 +11,6 @@ const MPHands = () => {
   const gameContext = useGameContext();
 
   useEffect(() => {
-    console.log(Hands);
     const hands = new Hands({
       locateFile: (file) => {
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/${file}`;
@@ -36,7 +35,7 @@ const MPHands = () => {
         width: '70vh',
         height: '50vh',
       });
-      camera.start();
+      camera.start()
     }
   }, []);
 
@@ -74,36 +73,32 @@ const MPHands = () => {
 
   return (
     <div>
-      {gameContext.gameRunning && 
-        <>
-          <Webcam
-            audio={false}
-            mirrored={true}
-            ref={webcamRef}
-            style={{
-              position: "absolute",
-              marginLeft: "auto",
-              marginRight: "auto",
-              textAlign: "center",
-              zindex: 9,
-              width: '70vh',
-              height: '50vh',
-            }}
-          />
-          <canvas
-            ref={canvasRef}
-            style={{
-              position: "absolute",
-              marginLeft: "auto",
-              marginRight: "auto",
-              textAlign: "center",
-              zindex: 9,
-              width: '70vh',
-              height: '50vh',
-            }}
-          ></canvas>
-        </>
-      }
+      <Webcam
+        audio={false}
+        mirrored={true}
+        ref={webcamRef}
+        style={{
+          position: "absolute",
+          marginLeft: "auto",
+          marginRight: "auto",
+          textAlign: "center",
+          zindex: 9,
+          width: '70vh',
+          height: '50vh',
+        }}
+      />
+      <canvas
+        ref={canvasRef}
+        style={{
+          position: "absolute",
+          marginLeft: "auto",
+          marginRight: "auto",
+          textAlign: "center",
+          zindex: 9,
+          width: '70vh',
+          height: '50vh',
+        }}
+      ></canvas>
     </div>
   );
 };

@@ -1,11 +1,10 @@
 import React from 'react'
-import { useGameContext, useUpdateGame } from '../contexts/GameContext'
+import { useGameContext } from '../contexts/GameContext'
 import MPHands from './MPHands';
 
 const GameArea = () => {
 
     const gameContext = useGameContext()
-    const updateGameContext = useUpdateGame()
 
     return (
         <div style={{
@@ -13,7 +12,7 @@ const GameArea = () => {
             height: '50vh',
             width: '70vh'
         }}>
-            <MPHands />
+            {gameContext.gameRunning && <MPHands />}
             {!gameContext.gameRunning && 
                 <spam>Game not running. Press Play to start a new game</spam>
             }
