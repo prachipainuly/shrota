@@ -9,10 +9,8 @@ const MPHands = () => {
   const canvasRef = useRef(null);
 
   useEffect(() => {
-    console.log(Hands);
     const hands = new Hands({
       locateFile: (file) => {
-        
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/${file}`;
       },
     });
@@ -35,12 +33,16 @@ const MPHands = () => {
         width: '70vh',
         height: '50vh',
       });
-      camera.start();
+      camera.start()
+      
+
+      
+
     }
   }, []);
 
   const onResults = (results) => {
-    console.log(results)
+    console.log(results.multiHandLandmarks)
     const videoWidth = webcamRef.current.video.videoWidth;
     const videoHeight = webcamRef.current.video.videoHeight;
     canvasRef.current.width = videoWidth;
@@ -69,6 +71,7 @@ const MPHands = () => {
       }
     }
     canvasCtx.restore();
+    
   };
 
   return (

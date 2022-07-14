@@ -29,7 +29,7 @@ const BottomSquare = () => {
                         alignItems: 'center',
                         justifyContent: 'space-evenly'
                     }}>
-                        <p style={{textDecoration: 'underline'}}>Word: {gameContext.currentWord}</p>
+                        <p style={{textDecoration: 'underline'}}>Word: {gameContext.words[gameContext.currentWord]}</p>
                         <p>Your current score: {score}</p>
                     </div> :
                     <p style={{alignSelf: 'center'}}>Press Play to start the game!</p>
