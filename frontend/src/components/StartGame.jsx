@@ -12,21 +12,21 @@ const StartGame = () => {
       updateGameContext({gameRunning: false})
       :
       ( 
-        api.get('get_random_alphabets/')
+        api.get('get_random_alphabeta/')
           .then(res => {
             let words = []
             res.data.map(item => {
               words = [...words, item.name]
-              
-            }
-            )
-            updateGameContext({...gameContext, words: words, currentWord: 0, gameRunning: true})
-            
-            
+            })
+            console.log(words)
+            /**
+             * Current word here is set to -1, because in the first iteration showNextWord updates it to 0.
+             */
+            updateGameContext({...gameContext, words: words, currentWord: -1, gameRunning: true, showNextWord: true})
           })
           .catch(function(error) {
             console.log('Error getting the list of words. Hardcoded list applied.')
-            updateGameContext({...gameContext, words: ['A', 'B', 'C'], gameRunning: true, currentWord: 0})
+            updateGameContext({...gameContext, words: ['A', 'B', 'C'], gameRunning: true, currentWord: -1, showNextWord: true})
           })
       )
   }
@@ -47,9 +47,9 @@ const StartGame = () => {
       }
       {gameContext.gameRunning && 
         <p style={{fontSize: '2rem', fontWeight: 'bold', margin: '0 2% 2% 0'}}>Exit</p>
-      }<div style={{width: '50px',
-      height: '40px',}}>
-      <Timer></Timer>
+      }
+      <div style={{width: '50px', height: '40px',}}>
+        <Timer />
       </div>
     </div>
   )
