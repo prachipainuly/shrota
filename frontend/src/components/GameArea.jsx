@@ -11,7 +11,6 @@ const GameArea = () => {
             backgroundColor: 'white',
             height: '50vh',
             width: '70vh'
-            
         }}>
             {gameContext.gameRunning && <MPHands />}
             {!gameContext.gameRunning && 

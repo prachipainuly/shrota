@@ -3,13 +3,7 @@ import { useGameContext } from '../contexts/GameContext';
 
 const BottomSquare = () => {
 
-    const [score, setScore] = useState(0)
     const gameContext = useGameContext()
-
-    useEffect(() => {
-        setScore(score => score + gameContext.scoreLastRound)
-    }, [gameContext.scoreLastRound])
-    
 
     return (
         <div style={{
@@ -29,8 +23,7 @@ const BottomSquare = () => {
                         alignItems: 'center',
                         justifyContent: 'space-evenly'
                     }}>
-                        <p style={{textDecoration: 'underline'}}>Word: {gameContext.words[gameContext.currentWord]}</p>
-                        <p>Your current score: {score}</p>
+                        <p style={{textDecoration: 'underline'}}>{gameContext.bottomText}</p>
                     </div> :
                     <p style={{alignSelf: 'center'}}>Press Play to start the game!</p>
                 }
