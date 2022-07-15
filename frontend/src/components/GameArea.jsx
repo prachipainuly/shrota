@@ -1,6 +1,7 @@
 import React from 'react'
 import { useGameContext } from '../contexts/GameContext'
 import MPHands from './MPHands';
+import welcome from '../assets/welcome.jpg'
 
 const GameArea = () => {
 
@@ -14,7 +15,7 @@ const GameArea = () => {
         }}>
             {gameContext.gameRunning && <MPHands />}
             {!gameContext.gameRunning && 
-                <spam>Game not running. Press Play to start a new game</spam>
+                <img src={welcome} alt='Welcome' style={{width: '90%', marginLeft: '5%'}} />
             }
         </div>
     )

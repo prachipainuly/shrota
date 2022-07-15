@@ -12,7 +12,7 @@ const StartGame = () => {
       updateGameContext({gameRunning: false})
       :
       ( 
-        api.get('get_random_alphabeta/')
+        api.get('get_random_alphabets/')
           .then(res => {
             let words = []
             res.data.map(item => {
