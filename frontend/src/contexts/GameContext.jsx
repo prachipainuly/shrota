@@ -14,12 +14,17 @@ export function useUpdateGame() {
 export function GameProvider({ children }){
     const [state, setState] = useState({
         gameRunning: false,
-        currentWord: 'Banana',
-        scoreLastRound: 0,
+        currentWord: 0,
+        scoreLastRound: {},
+        catchFrame: false,
+        sendFrame: false,
+        scoreLoading: false,
+        showScore: false,
+        showNextWord: false,
+        bottomText: ""
     })
 
     function updateGame(state){
-        console.log(state)
         setState(state)
     }
 

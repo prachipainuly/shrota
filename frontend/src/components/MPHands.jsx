@@ -1,18 +1,22 @@
 import { Camera } from '@mediapipe/camera_utils';
 import { drawConnectors, drawLandmarks } from '@mediapipe/drawing_utils';
 import { Hands, HAND_CONNECTIONS } from '@mediapipe/hands';
-import React, { useEffect, useRef } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Webcam from 'react-webcam';
+import { api } from '../api';
+import { useGameContext, useUpdateGame } from '../contexts/GameContext';
 
 const MPHands = () => {
-  const webcamRef = useRef(null);
-  const canvasRef = useRef(null);
+  const webcamRef = useRef(null)
+  const canvasRef = useRef(null)
+  const gameContext = useGameContext()
+  const updateGameContext = useUpdateGame()
+  const [ frameResults, setFrameResults ] = useState()
+  const [ results, setResults ] = useState()
 
   useEffect(() => {
-    console.log(Hands);
     const hands = new Hands({
       locateFile: (file) => {
-        
         return `https://cdn.jsdelivr.net/npm/@mediapipe/hands@0.4.1646424915/${file}`;
       },
     });
@@ -35,12 +39,47 @@ const MPHands = () => {
         width: '70vh',
         height: '50vh',
       });
-      camera.start();
+      camera.start()
     }
   }, []);
 
+  useEffect(() => {
+    if(gameContext.sendFrame === true && results){
+      console.log("send frame true")
+      updateGameContext({...gameContext, scoreLoading: true})
+      api.post("/calculate_round_result/", results).then(
+        res => {
+          res.data.result.includes('error') ?
+            updateGameContext({...gameContext, bottomText: "No hands detected!", scoreLoading: false, showScore: true})
+          :
+            updateGameContext({...gameContext, bottomText: `Result of the last symbol: ${res.data.result}`, scoreLoading: false, showScore: true})
+        }
+      ).finally(() => {
+        setResults()
+      })
+    } 
+
+    if(gameContext.catchFrame && !results){
+      console.log("catchFrame true")
+      let x = []
+      let y = []
+      let z = []
+      frameResults.multiHandLandmarks.map(hand => {
+        hand.map(landmarks => {
+          x.push(landmarks.x)
+          y.push(landmarks.y)
+          z.push(landmarks.z)
+        })})
+
+      setResults({x, y, z})
+    }
+  }, [gameContext.sendFrame, gameContext.catchFrame])
+
   const onResults = (results) => {
-    console.log(results)
+    if(results){
+      setFrameResults(results);
+    }
+
     const videoWidth = webcamRef.current.video.videoWidth;
     const videoHeight = webcamRef.current.video.videoHeight;
     canvasRef.current.width = videoWidth;
@@ -69,6 +108,7 @@ const MPHands = () => {
       }
     }
     canvasCtx.restore();
+    
   };
 
   return (

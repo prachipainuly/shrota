@@ -1,4 +1,5 @@
 import React from 'react'
+import { api } from '../api';
 import { useGameContext, useUpdateGame } from '../contexts/GameContext'
 import Timer from './Timer';
 const StartGame = () => {
@@ -10,7 +11,24 @@ const StartGame = () => {
     gameContext.gameRunning ? 
       updateGameContext({gameRunning: false})
       :
-      updateGameContext({gameRunning: true, currentWord: 'Banana'})
+      ( 
+        api.get('get_random_alphabets/')
+          .then(res => {
+            let words = []
+            res.data.map(item => {
+              words = [...words, item.name]
+            })
+            console.log(words)
+            /**
+             * Current word here is set to -1, because in the first iteration showNextWord updates it to 0.
+             */
+            updateGameContext({...gameContext, words: words, currentWord: -1, gameRunning: true, showNextWord: true})
+          })
+          .catch(function(error) {
+            console.log('Error getting the list of words. Hardcoded list applied.')
+            updateGameContext({...gameContext, words: ['A', 'B', 'C'], gameRunning: true, currentWord: -1, showNextWord: true})
+          })
+      )
   }
 
   return (
@@ -30,9 +48,7 @@ const StartGame = () => {
       {gameContext.gameRunning && 
         <p style={{fontSize: '2rem', fontWeight: 'bold', margin: '0 2% 2% 0'}}>Exit</p>
       }
-      <div style={{
-        width:"100px"
-      }}> 
+      <div style={{width: '50px', height: '40px',}}>
         <Timer />
       </div>
     </div>

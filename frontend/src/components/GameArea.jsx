@@ -1,21 +1,11 @@
-import React, { useEffect, useState } from 'react'
-import { api } from '../api';
-import { useGameContext, useUpdateGame } from '../contexts/GameContext'
+import React from 'react'
+import { useGameContext } from '../contexts/GameContext'
 import MPHands from './MPHands';
+import welcome from '../assets/welcome.jpg'
 
 const GameArea = () => {
 
     const gameContext = useGameContext()
-    const updateGameContext = useUpdateGame()
-
-    useEffect(() => {
-      api.get('get_word')
-        .then(res => {
-            updateGameContext({...gameContext, currentWord: res.data.name})
-        }).catch(function(error) {
-            updateGameContext({...gameContext, currentWord: 'error'})
-        })
-    }, [gameContext.scoreLastRound])
 
     return (
         <div style={{
@@ -23,15 +13,22 @@ const GameArea = () => {
             height: '50vh',
             width: '70vh'
         }}>
-            {console.log(gameContext.gameRunning)}
-            {gameContext.gameRunning && 
-                <MPHands />
-            }
+            {gameContext.gameRunning && <MPHands />}
             {!gameContext.gameRunning && 
-                <spam>Game not running. Press Play to start a new game</spam>
+                <img src={welcome} alt='Welcome' style={{width: '90%', marginLeft: '5%'}} />
             }
         </div>
     )
 }
 
 export default GameArea
+
+
+// Game start: gamestate ia true
+//     gameRunning true
+//     for 10 times:
+//         3 seconds to show whats the word  timwe 1 : state time is up true
+//         5 seconds with camera timer 2 : state time is up true
+//         Loading result
+//         3 seconds with result timer 3
+//     gameRunning false
