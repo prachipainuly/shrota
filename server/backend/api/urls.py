@@ -9,4 +9,5 @@ urlpatterns = [
     path('add_user/', views.add_user_score),
     path('get_random_alphabets/', views.get_random_alphabets),
     path('calculate_round_result/', views.calculate_round_result),
+    path('get_leaderboard/', views.get_leaderboard),
 ]
