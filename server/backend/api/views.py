@@ -8,9 +8,6 @@ from .serializers import WordSerializer, UserSerializer, SignsSerializer
 from shrota.models import Word, User, Signs
 
 
-# from shrota.distance_measurement.single_frame_processing import calculate_distance_from_two_frames
-
-
 @api_view(['GET'])
 def get_categories(request):
     category = {'count': 4, 'names': ["Fruits", "Greetings", "ASL Basics", "Alphabets"]}
