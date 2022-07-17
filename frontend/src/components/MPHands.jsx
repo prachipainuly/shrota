@@ -47,14 +47,20 @@ const MPHands = () => {
     if(gameContext.sendFrame === true && results){
       console.log("send frame true")
       updateGameContext({...gameContext, scoreLoading: true})
-      api.post("/calculate_round_result/", results).then(
+      const reqBody = {
+        right_handpoints: results, 
+        word: gameContext.words[gameContext.currentWord]
+      }
+      api.post("/calculate_round_result/", reqBody).then(
         res => {
           res.data.result.includes('error') ?
             updateGameContext({...gameContext, bottomText: "No hands detected!", scoreLoading: false, showScore: true})
           :
             updateGameContext({...gameContext, bottomText: `Result of the last symbol: ${res.data.result}`, scoreLoading: false, showScore: true})
         }
-      ).finally(() => {
+      ).catch(function(error) {
+          updateGameContext({...gameContext, bottomText: `Error obtaining your results.`, scoreLoading: false, showScore: true})
+      }).finally(() => {
         setResults()
       })
     } 
