@@ -19,6 +19,7 @@ export function GameProvider({ children }){
         catchFrame: false,
         sendFrame: false,
         scoreLoading: false,
+        words: [],
         showScore: false,
         showNextWord: false,
         bottomText: ""

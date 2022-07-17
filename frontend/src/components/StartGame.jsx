@@ -18,7 +18,6 @@ const StartGame = () => {
             res.data.map(item => {
               words = [...words, item.name]
             })
-            console.log(words)
             /**
              * Current word here is set to -1, because in the first iteration showNextWord updates it to 0.
              */

@@ -4,7 +4,7 @@ import ListSquare from './ListSquare';
 const Ranking = () => {
 
     const [state, setState] = useState({
-        list: ["xyrex123 : 300 pts.", "profitpainuly : 289 pts.", "dexamps : 113 pts."],
+        list: [{key: "xyrex123", value: "300 pts."}, {key: "profitpainuly", value: "289 pts."}, {key: "dexamps", value: "113 pts."}],
         title: "Ranking",
         color: "#"
     });

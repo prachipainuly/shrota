@@ -22,9 +22,14 @@ const ListSquare = (props) => {
         width: state.width,
         height: state.heigth
     }}>
-        <div className="content-wrapper" style={{margin: '5%'}}>
-            <p style={{fontSize: '2rem', fontWeight: 'bold'}}>{state.title}</p>
-            {state.list && state.list.map(s => <p key={s} style={{margin: '3% 0%', fontSize: '1.2rem'}} >{s}</p>)}
+        <div style={{margin: '5%'}}>
+            <p style={{fontSize: '2rem', fontWeight: 'bold', marginBottom: '5%'}}>{state.title}</p>
+            {state.list && state.list.map(s => 
+                <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                    <p key={s.key} style={{margin: '3% 0%', fontSize: '1.2rem'}}>{s.key}</p>
+                    <p key={s.key} style={{margin: '3% 0%', fontSize: '1.2rem'}}>{s.value}</p>
+                </div>
+            )}
         </div>
     </div>
   )
