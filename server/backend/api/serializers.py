@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from shrota.models import Word, User
+from shrota.models import Word, User, Signs
 
 
 class WordSerializer(serializers.ModelSerializer):
@@ -11,4 +11,10 @@ class WordSerializer(serializers.ModelSerializer):
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
+        fields = '__all__'
+
+
+class SignsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Signs
         fields = '__all__'
