@@ -1,6 +1,7 @@
 import json
 import random
 from rest_framework.response import Response
+from rest_framework import status
 from rest_framework.decorators import api_view
 from .serializers import WordSerializer, UserSerializer
 from shrota.models import Word, User
@@ -39,18 +40,32 @@ def get_random_alphabets(request):
 
 @api_view(['POST'])
 def calculate_round_result(request):
-    res = {'result': None}
+    res = {'result': None, 'score': 0}
+    score = 0
     try:
-        body = json.loads(request.body)
-        vector = dict(body).values()
-        difference = calculate_distance_from_two_frames(list(vector))
-        if difference < 50:
-            res = {'result': 'MATCHED'}
+        body = dict(json.loads(request.body))
+        vector = dict(body['right_handpoints']).values()
+        alpha = str.upper(body['word'])
+        difference = calculate_distance_from_two_frames(list(vector), alpha)
+        if 0 >= difference >= 10:
+            score = 10
+        elif 11 >= difference >= 20:
+            score = 20
+        elif 21 >= difference >= 30:
+            score = 30
+        elif 31 >= difference >= 40:
+            score = 40
+        elif 41 >= difference >= 50:
+            score = 50
         else:
-            res = {'result': f'NOT MATCHED'}
+            score = 0
+        if difference < 50:
+            res = {'result': 'MATCHED', 'score': score}
+        else:
+            res = {'result': f'NOT MATCHED', 'score': score}
+        return Response(res)
     except Exception as e:
-        res = {'result': f'error: {e}'}
-    return Response(res)
+        return Response({'result': f'error: {e}', 'score': None}, status.HTTP_400_BAD_REQUEST)
 
 
 @api_view(['POST'])
@@ -66,4 +81,11 @@ def add_user_score(request):
     serializer = UserSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
+    return Response(serializer.data)
+
+
+@api_view(['GET'])
+def get_leaderboard(request):
+    user_data = User.objects.order_by('-score')
+    serializer = UserSerializer(user_data, many=True)
     return Response(serializer.data)
