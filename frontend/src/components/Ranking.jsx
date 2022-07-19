@@ -12,7 +12,6 @@ const Ranking = () => {
     // useEffect(() => {
     //     /** TODO: request ranking from backend */
     // }, [])
-    
 
     return (
         <ListSquare 
