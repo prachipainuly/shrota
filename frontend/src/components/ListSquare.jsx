@@ -27,8 +27,8 @@ const ListSquare = (props) => {
                 <p style={{fontSize: '2rem', fontWeight: 'bold', marginBottom: '5%'}}>{state.title}</p>
                 {state.list && state.list.map(s => 
                     <div style={{display: 'flex', justifyContent: 'space-between'}}>
-                        <p key={s.key} style={{margin: '3% 0%', fontSize: '1.2rem'}}>{s.key}</p>
-                        <p key={s.key} style={{margin: '3% 0%', fontSize: '1.2rem'}}>{s.value}</p>
+                        <p style={{margin: '3% 0%', fontSize: '1.2rem'}}>{s.key}</p>
+                        <p style={{margin: '3% 0%', fontSize: '1.2rem'}}>{s.value}</p>
                     </div>
                 )}
             </div>

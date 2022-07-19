@@ -1,7 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { api } from '../api'
 import { useGameContext } from '../contexts/GameContext'
-import ListSquare from './ListSquare'
 
 const CurrentGame = () => {
 
@@ -12,16 +10,33 @@ const CurrentGame = () => {
     if(!words && gameContext.words.length > 0){
       const w = []
       gameContext.words.map(word => {
-        w.push({key: word, value: 'Not played'})
+        w.push(
+          <div style={{display: 'flex', justifyContent: 'space-between'}}>
+            <p style={{margin: '3% 0%', fontSize: '1.2rem'}}>{word}</p>
+            <p style={{margin: '3% 0%', fontSize: '1.2rem'}}>Not played</p>
+          </div>
+        )
       })
 
       setWords(w)
     }
 
-    if(gameContext.scoreLoading){
-      // setWords()
-    }
-  }, [gameContext.words, gameContext.scoreLoading])
+  }, [gameContext.words])
+
+  useEffect(() => {
+    if(gameContext.showScore){
+      const temp = words
+      temp[gameContext.currentWord] = 
+        <div style={{display: 'flex', justifyContent: 'space-between'}}>
+          <p style={{margin: '3% 0%', fontSize: '1.2rem'}}>{gameContext.words[gameContext.currentWord]}</p>
+          <p style={{margin: '3% 0%', fontSize: '1.2rem', color: gameContext.scoreLastRound > 0 ? '#008000' : '#FF0000'}}>
+            {gameContext.scoreLastRound > 0 ? `MATCHED (${gameContext.scoreLastRound})` : 'NOT MATCHED'}
+          </p>
+        </div>
+      setWords(temp)
+    } 
+  }, [gameContext.showScore])
+  
 
   useEffect(() => {
     if(!gameContext.gameRunning){
@@ -31,14 +46,19 @@ const CurrentGame = () => {
   
     
   return (
-    <ListSquare 
-        list={words}
-        title="Current game" 
-        color="#ddc7ff"
-        borderColor="#7b6492"
-        width="18%"
-        heigth="70vh"
-        />
+    <div style={{
+      backgroundColor: `#ddc7ff`,
+      border: `5px solid #7b6492`,
+        width:"18%",
+        heigth:"70vh"
+    }}>
+        <div style={{margin: '5%'}}>
+            <p style={{fontSize: '2rem', fontWeight: 'bold', marginBottom: '5%'}}>Current game</p>
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                    {words ? words : 'The information about your game will be here!'}
+                </div>
+        </div>
+    </div>
   )
 }
 
