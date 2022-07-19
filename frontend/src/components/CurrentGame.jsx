@@ -32,7 +32,7 @@ const CurrentGame = () => {
     
   return (
     <ListSquare 
-        list={words ? words : [{key: 'The information about your game will be here!'}]}
+        list={words}
         title="Current game" 
         color="#ddc7ff"
         borderColor="#7b6492"

@@ -16,7 +16,7 @@ const Ranking = () => {
 
     return (
         <ListSquare 
-            title="Ranking"
+            title="Leaderboard"
             color="#ffd7d7"
             borderColor="#c76c6c"
             list={state.list}
