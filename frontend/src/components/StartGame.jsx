@@ -47,7 +47,7 @@ const StartGame = () => {
       {gameContext.gameRunning && 
         <p style={{fontSize: '2rem', fontWeight: 'bold', margin: '0 2% 2% 0'}}>Exit</p>
       }
-      <div style={{width: '50px', height: '40px',}}>
+      <div>
         <Timer />
       </div>
     </div>

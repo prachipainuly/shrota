@@ -73,10 +73,10 @@ function Timer(){
 
     return(
         <div>
-            <CircularProgressbar seconds={seconds} 
-            maxValue={seconds}
+            {/* <CircularProgressbar
+            maxValue={gameContext.showNextWord === true ? 3 : 5}
             value= {seconds}
-            text={`${seconds }`} />
+            text={`${seconds}`} /> */}
         </div> 
     )
 }
