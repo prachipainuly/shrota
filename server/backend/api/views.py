@@ -116,13 +116,13 @@ def calculate_round_result(request):
         if 0 <= difference <= 1:
             print('reached here')
             score = 50
-        elif 11 <= difference <= 2:
+        elif 1 <= difference <= 2:
             score = 40
-        elif 21 <= difference <= 3:
+        elif 2 <= difference <= 3:
             score = 30
-        elif 31 <= difference <= 4:
+        elif 3 <= difference <= 4:
             score = 20
-        elif 41 <= difference <= 5:
+        elif 4 <= difference <= 5:
             score = 10
         else:
             score = 0
