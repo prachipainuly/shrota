@@ -55,9 +55,21 @@ const MPHands = () => {
         res => {
           console.log(res.data)
           res.data.result.includes('error') ?
-            updateGameContext({...gameContext, bottomText: "No hands detected!", scoreLoading: false, showScore: true, scoreLastRound: 0})
+            updateGameContext({
+              ...gameContext, 
+              bottomText: "No hands detected!", 
+              scoreLoading: false, 
+              showScore: true, 
+              scoreLastRound: 0
+            })
           :
-            updateGameContext({...gameContext, bottomText: `Result of the last symbol: ${res.data.result}`, scoreLoading: false, showScore: true, scoreLastRound: res.data.score})
+            updateGameContext({
+              ...gameContext, 
+              bottomText: `Result: ${res.data.result}`, 
+              scoreLoading: false, 
+              showScore: true, 
+              scoreLastRound: res.data.score
+            })
         }
       ).catch(function(error) {
           updateGameContext({...gameContext, bottomText: `Error obtaining your results.`, scoreLoading: false, showScore: true})

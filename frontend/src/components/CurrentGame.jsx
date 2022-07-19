@@ -28,8 +28,8 @@ const CurrentGame = () => {
       const temp = words
       temp[gameContext.currentWord] = 
         <div style={{display: 'flex', justifyContent: 'space-between'}}>
-          <p style={{margin: '3% 0%', fontSize: '1.2rem'}}>{gameContext.words[gameContext.currentWord]}</p>
-          <p style={{margin: '3% 0%', fontSize: '1.2rem', color: gameContext.scoreLastRound > 0 ? '#008000' : '#FF0000'}}>
+          <p style={{margin: '3% 0%'}}>{gameContext.words[gameContext.currentWord]}</p>
+          <p style={{margin: '3% 0%', color: gameContext.scoreLastRound > 0 ? '#008000' : '#FF0000'}}>
             {gameContext.scoreLastRound > 0 ? `MATCHED (${gameContext.scoreLastRound})` : 'NOT MATCHED'}
           </p>
         </div>
@@ -54,7 +54,7 @@ const CurrentGame = () => {
     }}>
         <div style={{margin: '5%'}}>
             <p style={{fontSize: '2rem', fontWeight: 'bold', marginBottom: '5%'}}>Current game</p>
-                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between'}}>
+                <div style={{display: 'flex', flexDirection: 'column', justifyContent: 'space-between', fontSize: '1.2rem'}}>
                     {words ? words : 'The information about your game will be here!'}
                 </div>
         </div>
