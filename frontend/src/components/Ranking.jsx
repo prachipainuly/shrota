@@ -1,28 +1,33 @@
-import React, { useState } from 'react'
-import ListSquare from './ListSquare';
+import React, { useEffect, useState } from 'react'
+import { api } from '../api';
 
 const Ranking = () => {
 
     const [state, setState] = useState({
-        list: [{key: "xyrex123", value: "300 pts."}, {key: "profitpainuly", value: "289 pts."}, {key: "dexamps", value: "113 pts."}],
-        title: "Ranking",
-        color: "#"
+        list: [],
     });
 
-    // useEffect(() => {
-    //     /** TODO: request ranking from backend */
-    // }, [])
-    
+    useEffect(() => {
+        api.get('get_leaderboard/').then(res => setState(state => ({...state, list: res.data})))
+    }, [])
 
     return (
-        <ListSquare 
-            title="Ranking"
-            color="#ffd7d7"
-            borderColor="#c76c6c"
-            list={state.list}
-            width="30vh"
-            heigth="50vh"
-        />
+        <div style={{
+            backgroundColor: "#ffd7d7",
+            border: `5px solid #c76c6c`,
+            width: "30vh",
+            height: "50vh"
+        }}>
+            <div style={{margin: '5%'}}>
+                <p style={{fontSize: '2rem', fontWeight: 'bold', marginBottom: '5%'}}>Leaderboard</p>
+                {state.list && state.list.map(item => 
+                    <div style={{display: 'flex', justifyContent: 'space-between'}}>
+                        <p style={{margin: '3% 0%', fontSize: '1.2rem'}}>{item.name}</p>
+                        <p style={{margin: '3% 0%', fontSize: '1.2rem'}}>{item.score}</p>
+                    </div>
+                )}
+            </div>
+        </div>
     )
 }
 

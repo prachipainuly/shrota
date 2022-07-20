@@ -1,7 +1,7 @@
 import React from 'react'
 import { useGameContext } from '../contexts/GameContext'
 import MPHands from './MPHands';
-import welcome from '../assets/welcome.jpg'
+import welcome from '../assets/welcome.png'
 
 const GameArea = () => {
 
@@ -15,7 +15,7 @@ const GameArea = () => {
         }}>
             {gameContext.gameRunning && <MPHands />}
             {!gameContext.gameRunning && 
-                <img src={welcome} alt='Welcome' style={{width: '90%', marginLeft: '5%'}} />
+                <img src={welcome} alt='Welcome' style={{width: '90%', margin: '10% 5%'}} />
             }
         </div>
     )

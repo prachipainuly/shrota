@@ -113,16 +113,16 @@ def calculate_round_result(request):
         vector = dict(body['right_handpoints']).values()
         alpha = str.upper(body['word'])
         difference = calculate_distance_from_two_frames(list(vector), alpha)
-        if 0 <= difference <= 10:
+        if 0 <= difference <= 2:
             print('reached here')
             score = 50
-        elif 11 <= difference <= 20:
+        elif 1 <= difference <= 2.6:
             score = 40
-        elif 21 <= difference <= 30:
+        elif 2 <= difference <= 3.2:
             score = 30
-        elif 31 <= difference <= 40:
+        elif 3 <= difference <= 3.8:
             score = 20
-        elif 41 <= difference <= 50:
+        elif 4 <= difference <= 5:
             score = 10
         else:
             score = 0

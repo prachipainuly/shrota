@@ -15,7 +15,7 @@ export function GameProvider({ children }){
     const [state, setState] = useState({
         gameRunning: false,
         currentWord: 0,
-        scoreLastRound: {},
+        scoreLastRound: 0,
         catchFrame: false,
         sendFrame: false,
         scoreLoading: false,
