@@ -13,9 +13,6 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
-    def create(self, validated_data):
-        return User(**validated_data)
-
     def update(self, instance, validated_data):
         instance.name = validated_data.get('name', instance.name)
         instance.score = validated_data.get('score', instance.score)
