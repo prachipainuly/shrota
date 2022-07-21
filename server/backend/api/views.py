@@ -114,7 +114,6 @@ def calculate_round_result(request):
         alpha = str.upper(body['word'])
         difference = calculate_distance_from_two_frames(list(vector), alpha)
         if 0 <= difference <= 2:
-            print('reached here')
             score = 50
         elif 1 <= difference <= 2.6:
             score = 40
@@ -145,9 +144,15 @@ def add_random_word(request):
 
 @api_view(['POST'])
 def add_user_score(request):
-    serializer = UserSerializer(data=request.data)
-    if serializer.is_valid():
-        serializer.save()
+    user = User.objects.get(name=request.data['name'])
+    if not user:
+        serializer = UserSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+    else:
+        serializer = UserSerializer(user, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
     return Response(serializer.data)
 
 
