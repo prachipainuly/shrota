@@ -144,8 +144,9 @@ def add_random_word(request):
 
 @api_view(['POST'])
 def add_user_score(request):
-    user = User.objects.get(name=request.data['name'])
-    if not user:
+    try:
+        user = User.objects.get(name=request.data['name'])
+    except Exception as e:
         serializer = UserSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
