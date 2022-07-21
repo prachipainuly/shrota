@@ -15,7 +15,7 @@ const StartGame = () => {
         api.get('get_random_alphabets/')
           .then(res => {
             let words = []
-            res.data.map(item => {
+            res.data.forEach(item => {
               words = [...words, item.name]
             })
             /**

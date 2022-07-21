@@ -22,7 +22,9 @@ export function GameProvider({ children }){
         words: [],
         showScore: false,
         showNextWord: false,
-        bottomText: ""
+        bottomText: "",
+        askNickname: false,
+        totalScore: 0
     })
 
     function updateGame(state){

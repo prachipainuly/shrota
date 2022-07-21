@@ -53,7 +53,6 @@ const MPHands = () => {
       }
       api.post("/calculate_round_result/", reqBody).then(
         res => {
-          console.log(res.data)
           res.data.result.includes('error') ?
             updateGameContext({
               ...gameContext, 
@@ -65,9 +64,10 @@ const MPHands = () => {
           :
             updateGameContext({
               ...gameContext, 
-              bottomText: `Result: ${res.data.result}`, 
+              bottomText: res.data.score > 0 ? `Result: ${res.data.result} (${res.data.score} points obtained)` : `Result: ${res.data.result}`, 
               scoreLoading: false, 
               showScore: true, 
+              totalScore: gameContext.totalScore + res.data.score,
               scoreLastRound: res.data.score
             })
         }
@@ -83,8 +83,8 @@ const MPHands = () => {
       let x = []
       let y = []
       let z = []
-      frameResults.multiHandLandmarks.map(hand => {
-        hand.map(landmarks => {
+      frameResults.multiHandLandmarks.forEach(hand => {
+        hand.forEach(landmarks => {
           x.push(landmarks.x)
           y.push(landmarks.y)
           z.push(landmarks.z)

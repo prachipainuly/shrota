@@ -1,5 +1,3 @@
-import { CircularProgressbar } from 'react-circular-progressbar';
-import 'react-circular-progressbar/dist/styles.css';
 import React from 'react'
 import { useGameContext, useUpdateGame } from '../contexts/GameContext'
 function Timer(){
@@ -38,7 +36,7 @@ function Timer(){
             if(gameContext.showNextWord){
                 console.log("Entrou no show next word")
                 if(gameContext.words && gameContext.words.length===gameContext.currentWord+1){
-                    updateGameContext({...gameContext, gameRunning:false, currentWord: 0});
+                    updateGameContext({...gameContext, gameRunning:false, currentWord: 0, askNickname: true});
                 } else {
                     updateGameContext({...gameContext, bottomText: `The next word will be ${gameContext.words[gameContext.currentWord+1]}`})
                     setTimeout(() => {
