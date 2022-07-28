@@ -1,5 +1,5 @@
 # shrota
-A gaming web app for capturing ASL gestures and converting them to text.
+A gaming web app for capturing ASL gestures and matching them for correctness.
 
 Steps to run backend server:
 
